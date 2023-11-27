@@ -1,0 +1,47 @@
+{% extends 'home/base.html' %}
+
+{% load my_tags %}
+
+{% block content %}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Всего рассылок</th>
+        <th scope="col">Активных рассылок</th>
+        <th scope="col">Количество клиентов</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>{{ total_mailing }}</td>
+        <td>{{ active_mailing }}</td>
+        <td>{{ clients_count }}</td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="col-12 text-center">
+    <div class="col-12 mt-0 mb-1">
+        <h4>А вы уже читали наш блог?</h4>
+    </div>
+</div>
+<div class="row">
+    {% for object in random_articles %}
+    <div class="col mb-4">
+        <div class="card mb-4 box-shadow">
+            <img class="card-img-top" src="{{ object.preview|mediapath }}"
+                 alt="Card image cap">
+            <div class="card-body">
+                <p class="card-text"><b>{{ object.title }}</b></p>
+                <p class="card-text">{{ object.content|truncatechars:150 }}</p>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'blog:blog_detail' object.pk %}" type="button" class="btn btn-success">Просмотр</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

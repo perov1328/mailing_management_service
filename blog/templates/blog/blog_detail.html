@@ -1,0 +1,23 @@
+{% extends 'home/base.html' %}
+
+{% load my_tags %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row text-start">
+        <div class="col-12">
+            <img class="card-img-top" src="{{ object.preview|mediapath }}"
+                 alt="Card image cap">
+            <div class="card-body">
+                <p class="card-text">{{ object.content }}</p>
+            </div>
+            <div class="card-footer">
+                Просмотры: {{ object.views_count }}
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock %}

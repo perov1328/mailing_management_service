@@ -1,0 +1,32 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+
+<form method="post" class="row">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header">
+                {% if object %}
+                    Обновить информацию в сообщении
+                {% else %}
+                    Создать новое сообщение для рассылки
+                {% endif %}
+            </div>
+            <div class="card-body">
+                {% csrf_token %}
+                {{ form.as_p }}
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-outline-success">
+                    {% if object %}
+                        Обновить
+                    {% else %}
+                        Создать
+                    {% endif %}
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock %}

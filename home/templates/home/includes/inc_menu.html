@@ -1,0 +1,22 @@
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+    <h5 class="my-0 mr-md-auto font-weight-normal">Mail Manager by 13|28</h5>
+    <nav class="my-2 my-md-0 mr-md-3">
+        <a class="p-2 text-dark" href="{% url 'home:home' %}">Главная</a>
+        <a class="p-2 text-dark" href="{% url 'client:clients' %}">Клиенты</a>
+        <a class="p-2 text-dark" href="{% url 'mailing:messages' %}">Сообщения</a>
+        <a class="p-2 text-dark" href="{% url 'mailing:settings' %}">Расписание</a>
+        <a class="p-2 text-dark" href="{% url 'blog:blogs' %}">Блог</a>
+        <a class="p-2 text-dark" href="{% url 'mailing:logs' %}">Логи</a>
+    </nav>
+    {% if user.is_authenticated %}
+    <div class="d-grid gap-2 d-md-block">
+        <a class="btn btn-primary" href="{% url 'users:profile' %}" class="text-white">Профиль</a>
+        <a class="btn btn-primary" href="{% url 'users:logout' %}" class="text-white">Выход</a>
+    </div>
+    {% else %}
+    <div class="d-grid gap-2 d-md-block">
+        <a class="btn btn-primary" href="{% url 'users:login' %}" class="text-white">Вход</a>
+        <a class="btn btn-primary" href="{% url 'users:register' %}" class="text-white">Регистрация</a>
+    </div>
+    {% endif %}
+</div>

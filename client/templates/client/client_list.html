@@ -1,0 +1,36 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+
+{% if user.is_superuser %}
+<div class="col-12 mb-5">
+    <a class="btn btn-primary" href="{% url 'client:create_client' %}">Создать нового клиента</a>
+</div>
+{% endif %}
+
+<div class="row">
+    {% for object in object_list %}
+    <div class="col-md-4">
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <p class="card-text">{{ object.first_name }}</p>
+                <p class="card-text">{{ object.last_name }}</p>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Почта: {{ object.email }}</p>
+                <p class="card-text">Телефон: {{ object.phone }}</p>
+                <p class="card-text">Дата регистрации: {{ object.registration_date }}</p>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'client:client_detail' object.pk %}" type="button" class="btn btn-success">Просмотр</a>
+                {% if user.role == 'manager' or user.is_superuser %}
+                <a href="{% url 'client:client_update' object.pk %}" type="button" class="btn btn-warning">Изменить</a>
+                <a href="{% url 'client:client_delete' object.pk %}" type="button" class="btn btn-danger">Удалить</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

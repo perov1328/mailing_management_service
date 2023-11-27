@@ -1,0 +1,31 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+
+<div class="col-12 mb-5">
+    <a href="{% url 'mailing:create_message' %}" type="button" class="btn btn-primary">Создать новую рассылку</a>
+</div>
+
+<div class="row">
+    {% for object in object_list %}
+    <div class="col-md-4">
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <p class="card-text">{{ object.heading }}</p>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ object.body|truncatechars:100 }}</p>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'mailing:message_detail' object.pk %}" type="button" class="btn btn-success">Просмотр</a>
+                {% if user.role == 'manager' or user.is_superuser %}
+                <a href="{% url 'mailing:message_update' object.pk %}" type="button" class="btn btn-warning">Изменить</a>
+                <a href="{% url 'mailing:message_delete' object.pk %}" type="button" class="btn btn-danger">Удалить</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

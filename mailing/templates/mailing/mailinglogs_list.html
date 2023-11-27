@@ -1,0 +1,26 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">Сообщение</th>
+        <th scope="col">Дата и время последней попытки</th>
+        <th scope="col">Статус</th>
+        <th scope="col">Ответ почтового сервера</th>
+    </tr>
+    </thead>
+    {% for object in object_list %}
+    <tbody>
+    <tr>
+        <td>{{ object.message }}</td>
+        <td>{{ object.datatime_attempt }}</td>
+        <td>{{ object.status }}</td>
+        <td>{{ object.server_answer }}</td>
+    </tr>
+    </tbody>
+    {% endfor %}
+</table>
+
+{% endblock %}
